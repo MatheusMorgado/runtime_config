@@ -36,8 +36,8 @@ module RuntimeConfig
       restart = false
       @actions = []
       if LOGGER_SEVERITY.include?((req.params['log'] || '').downcase)
-        level = "Logger::#{req.params['log'].upcase}"
-        Rails.logger.level = level.constantize
+        level = "#{req.params['log']}"
+        Rails.logger.level = level
         @actions.push "Logger level set to: #{level}"
       end
       if req.params.include? 'cache'
